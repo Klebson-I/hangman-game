@@ -8,9 +8,10 @@ interface Props {
     changeLetters:(letter:string)=>void;
     chosenLetters:string[];
     letterStat:LetterStat[];
+    started:boolean;
 }
 
-export const Keyboard = ({alphabet,changeLetters,letterStat}:Props) => {
+export const Keyboard = ({alphabet,changeLetters,letterStat,started}:Props) => {
 
     return <div className="keyboardDiv">
         {
@@ -22,6 +23,7 @@ export const Keyboard = ({alphabet,changeLetters,letterStat}:Props) => {
                     stat={
                         letterStat.filter(elem=>elem.letter===letter)
                     }
+                    started={started}
                 />
             })
         }

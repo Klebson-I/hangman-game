@@ -30,6 +30,7 @@ export const App = () => {
     const [actualImage,setActualImage] = useState<string>(IMGARR[0]);
     const [finalText,setFinalText] = useState<string>("");
 
+
     const gameLost = () => {
         setFinalText(finalTexts[1]);
     }
@@ -40,7 +41,6 @@ export const App = () => {
 
     const checkIfWon = () => {
         if ((password.replaceAll("-"," ")===originalPassword)&&started) {
-            console.log("won");
             gameWon();
             setGameStatus(true);
         }
@@ -132,6 +132,7 @@ export const App = () => {
             changeLetters={changeLetters}
             chosenLetters={chosenLetter}
             letterStat={letterStat}
+            started={started}
 
         />
         {
