@@ -15,3 +15,28 @@
 .resultsDiv__results{
 
 }
+.container {
+  position: relative;
+  z-index: 1;
+}
+.endGameDiv {
+  width: 300px;
+  height: 200px;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 100;
+  background-color: white;
+}
+.endGameDiv p{
+  font-size: 25px;
+}
+.endGameDiv button{
+  font-size: 25px;
+}

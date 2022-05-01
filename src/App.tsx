@@ -15,10 +15,12 @@ import img8 from './images/s8.jpg';
 import img9 from './images/s9.jpg';
 
 const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const IMGARR = [img0,img1,img2,img3,img4,img5,img6,img7,img8,img9,]
+const IMGARR = [img0,img1,img2,img3,img4,img5,img6,img7,img8,img9,];
+const finalTexts = [`Congratulations, you won ! Maybe try with another password ?`,
+"You failed, try again :)",];
 
 export const App = () => {
-    const [chosenLetter,changeChosenLetter] = useState<string[]>([]);
+    const [chosenLetter,setChosenLetter] = useState<string[]>([]);
     const [fail,setFail] = useState<number>(0);
     const [password,setPassword] = useState<string>("");
     const [originalPassword,setOriginalPassword] = useState<string>("");
@@ -26,21 +28,17 @@ export const App = () => {
     const [started,setStarted] = useState<boolean>(false);
     const [gameStatus,setGameStatus] = useState<boolean|null>(null);
     const [actualImage,setActualImage] = useState<string>(IMGARR[0]);
+    const [finalText,setFinalText] = useState<string>("");
 
     const gameLost = () => {
-
+        setFinalText(finalTexts[1]);
     }
 
     const gameWon = () => {
-
+        setFinalText(finalTexts[0]);
     }
 
     const checkIfWon = () => {
-        console.log(password.replaceAll("-"," "));
-        console.log(originalPassword);
-        console.log(started);
-        console.log(originalPassword.length)
-        console.log(password.replaceAll("-"," ").length)
         if ((password.replaceAll("-"," ")===originalPassword)&&started) {
             console.log("won");
             gameWon();
@@ -48,9 +46,22 @@ export const App = () => {
         }
     }
 
+    const startNewGame = () => {
+        const PASSWORD = drawPassword();
+        setOriginalPassword(PASSWORD);
+        setPassword(setStartStringPassword(PASSWORD));
+        setChosenLetter([]);
+        setFail(0);
+        setLetterStat([]);
+        setStarted(false);
+        setGameStatus(null);
+        setFinalText("");
+        setActualImage(IMGARR[0]);
+    }
+
     const changeLetters = (letter:string) => {
         if(fail<9){
-            changeChosenLetter(prev=>([
+            setChosenLetter(prev=>([
                 ...prev,
                 letter
             ]))
@@ -69,7 +80,7 @@ export const App = () => {
     },[]);
 
     useEffect(()=>{
-        if(started){
+        if(started&&gameStatus===null){
             const reveal = revealLetter(password,chosenLetter[chosenLetter.length-1],originalPassword);
 
             setLetterStat((prev)=>{
@@ -98,8 +109,12 @@ export const App = () => {
     },[fail])
 
 
-    return <>
-        <div className="resultsDiv">
+
+
+    return <div className="container" >
+        <div className="resultsDiv" style = {{
+            opacity:gameStatus?0.1:1
+        }}>
             <div className="resultsDiv__results">
                 <h1>HANGMAN GAME</h1>
                 <h1 className="password">
@@ -117,11 +132,15 @@ export const App = () => {
             changeLetters={changeLetters}
             chosenLetters={chosenLetter}
             letterStat={letterStat}
+
         />
         {
-            gameStatus!=null?<div>
-                {gameStatus ? <p>You win</p> : <p>You lose</p>}
+            gameStatus!=null?<div className="endGameDiv">
+                {
+                    <p>{finalText}</p>
+                }
+                <button onClick={e=>startNewGame()}>Start new game</button>
             </div>:null
         }
-    </>
+    </div>
 }
