@@ -6,3 +6,12 @@
   align-items: center;
   justify-content: space-evenly;
 }
+.resultsDiv{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.resultsDiv__results{
+
+}

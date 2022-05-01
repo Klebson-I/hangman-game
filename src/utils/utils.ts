@@ -39,6 +39,6 @@ const passList = [
 ]
 
 export const drawPassword = ():string => {
-    const index = Math.floor(Math.random()*passList.length+1);
+    const index = Math.floor(Math.random()*(passList.length));
     return passList[index];
 }
