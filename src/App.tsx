@@ -113,7 +113,7 @@ export const App = () => {
 
     return <div className="container" >
         <div className="resultsDiv" style = {{
-            opacity:gameStatus?0.1:1
+            opacity:gameStatus!==null?0.1:1
         }}>
             <div className="resultsDiv__results">
                 <h1>HANGMAN GAME</h1>
@@ -140,7 +140,7 @@ export const App = () => {
                 {
                     <p>{finalText}</p>
                 }
-                <button onClick={e=>startNewGame()}>Start new game</button>
+                <button onClick={()=>startNewGame()}>Start new game</button>
             </div>:null
         }
     </div>
