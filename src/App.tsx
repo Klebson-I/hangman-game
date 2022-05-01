@@ -13,6 +13,7 @@ import img6 from './images/s6.jpg';
 import img7 from './images/s7.jpg';
 import img8 from './images/s8.jpg';
 import img9 from './images/s9.jpg';
+import {EndGame} from "./Components/EndGame/EndGame";
 
 const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const IMGARR = [img0,img1,img2,img3,img4,img5,img6,img7,img8,img9,];
@@ -136,12 +137,10 @@ export const App = () => {
 
         />
         {
-            gameStatus!=null?<div className="endGameDiv">
-                {
-                    <p>{finalText}</p>
-                }
-                <button onClick={()=>startNewGame()}>Start new game</button>
-            </div>:null
+            gameStatus!=null?<EndGame
+                finalText={finalText}
+                startNewGame={startNewGame}
+            />:null
         }
     </div>
 }
